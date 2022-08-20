@@ -1,19 +1,7 @@
 <template>
-<h3>
-This is your footer
-</h3>
-
+  <div>Footer Component</div>
 </template>
 
-<script>
-export default {
+<script setup></script>
 
-}
-</script>
-
-<style scoped>
-h3 {
-    background: lightblue;
-}
- 
-</style>
+<style></style>

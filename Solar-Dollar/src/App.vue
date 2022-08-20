@@ -1,37 +1,36 @@
-<template>
-  <div>
-    <Navbar />
-    <Menu />
-    <SignUp />
-    <SignIn />
-    <SingOut />
-    <button>Here</button>
-  </div>
-  
-
-</template>
-
 <script setup>
-import { ref, computed } from 'vue';
-import Navbar from './components/Navbar.vue';
-import Menu from './components/Menu.vue';
-import SignUp from './components/SignUp.vue';
-import SignIn from './components/SignIn.vue';
-import SignOut from './components/SignOut.vue';
-import { RouterView } from 'vue-router';
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
+import { useUserStore } from "./stores/user.js";
+import { ref } from "vue";
 
+const router = useRouter();
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 
-// reactive state
-const count = ref(0);
-
-// functions that mutate state and trigger updates
-function increment() {
-  count.value++
-};
-
-<router-view />
+onMounted(async () => {
+  const appReady = ref(null);
+  try {
+    await userStore.fetchUser(); // here we call fetch user
+    if (!user.value) {
+      // redirect them to logout if the user is not there
+      appReady.value = true;
+      router.push({ path: "/auth/login" });
+    } else {
+      // continue to dashboard
+      // router.push({ path: "/" });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
 </script>
 
-<style>
+<template>
+  <div>
+    <router-view />
+  </div>
+</template>
 
-</style>
+<style></style>
