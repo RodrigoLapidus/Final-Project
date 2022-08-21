@@ -13,7 +13,6 @@ const routes = [
     children: [
       { path: "login", component: SignIn },
       { path: "sign-up", component: SignUp },
-      { path: "logout", component: SignOut },
     ],
   },
 

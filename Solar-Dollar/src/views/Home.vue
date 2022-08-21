@@ -1,8 +1,24 @@
 <template>
-  <div>hello</div>
+  <div>
+    <Nav />
+    <p>hello</p>
+    <SignOut />
+  </div>
+  
 </template>
 
-<script setup></script>
+<script setup>
+  import { ref, computed } from "vue";
+  import PersonalRouter from "../components/PersonalRouter.vue";
+  import { supabase } from "../supabase";
+  import { useRouter } from "vue-router";
+  import { useUserStore } from "../stores/user";
+  import { storeToRefs } from "pinia";
+
+  import Nav from "../components/Nav.vue"
+  import SignOut from "../components/SignOut.vue"
+
+</script>
 
 <style></style>
 
