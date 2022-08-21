@@ -7,7 +7,7 @@
           <input type="password" v-model="password" name="password" placeholder="***********">
           <label for="confirm-password"></label>
           <input type="password" v-model="confirmPassword" name="confirm-password" placeholder="***********">
-          <button type="submit">Sign In</button>
+          <button type="submit">Sign Up</button>
         </form>
         <div>Sign Up</div>
         <PersonalRouter :route="route" :buttonText="buttonText" />
@@ -57,7 +57,7 @@ const signUp = async () => {
         try {
           // calls the user store and send the users info to backend to logIn
           await useUserStore().signUp(email.value, password.value);
-          // redirects user to the homeView
+          // redirects user to the loginView
           redirect.push({ path: "/auth/login" });
         } catch (error) {
           // displays error message
@@ -69,7 +69,7 @@ const signUp = async () => {
         }
     }
     else {
-        errorMsg.value = true;
+        passwordsNotSame = true;
         console.log(passwordsNotSame);
         return passwordsNotSame;
     }

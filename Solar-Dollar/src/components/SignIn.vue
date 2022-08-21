@@ -1,13 +1,13 @@
 <template>
     <div>
-        <form action="" method="post">
+        <form @submit.prevent="signIn">
           <label for="email"></label>
-          <input type="email" name="email" placeholder="dave@mail.com">
+          <input type="email" v-model="email" name="email" placeholder="dave@mail.com">
           <label for="password"></label>
-          <input type="password" name="password" placeholder="***********">
-          <button @submit.prevent>Sign In</button>
+          <input type="password" v-model="password" name="password" placeholder="***********">
+          <button type="submit">Sign In</button>
         </form>
-        <div>Sign In</div>
+
         <PersonalRouter :route="route" :buttonText="buttonText" />
         <p>Time to build up the Final Project!</p>
         <p class="wu-text">Wu Tang Forever</p>

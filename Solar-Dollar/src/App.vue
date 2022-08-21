@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./stores/user.js";
 import { ref } from "vue";
+import { supabase } from "./supabase"
 
 const router = useRouter();
 const userStore = useUserStore();

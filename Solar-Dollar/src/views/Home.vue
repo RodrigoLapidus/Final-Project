@@ -1,23 +1,8 @@
 <template>
-  <div>
-    <Nav />
-    <NewTask />
-    <TaskItem />
-    <Footer />
-  </div>
+  <div>hello</div>
 </template>
 
-<script setup>
-    import Navbar from "../components/Nav.vue";
-    import NewTask from "../components/NewTask.vue";
-    import TaskItem from "../components/TaskItem.vue";
-    import Footer from "../components/Footer.vue";
-
-
-
-
-
-</script>
+<script setup></script>
 
 <style></style>
 
