@@ -1,8 +1,10 @@
 <template>
   <div>
     <Nav />
-    <p>hello</p>
     <SignOut />
+    <p>hello</p>
+    <NewTask />
+    <Footer />
   </div>
   
 </template>
@@ -17,6 +19,9 @@
 
   import Nav from "../components/Nav.vue"
   import SignOut from "../components/SignOut.vue"
+  import Footer from "../components/Footer.vue"
+  import NewTask from "../components/NewTask.vue"
+  import TaskItem from "../components/TaskItem.vue"
 
 </script>
 

@@ -1,8 +1,25 @@
 <template>
-  <div>Task Item Component</div>
+  <div>
+    <p>Task Item Component</p>
+    <p @taskList="printTasks">{{ taskHeading }}</p>
+  </div>
 </template>
 
 <script setup>
+  const taskHeading = "";
+
+  const tasks = ref({
+    boolVariable: false,
+    errVariable: "",
+    taskVariable: "",
+    inputField: false,
+  });
+  const printTasks = (taskName) => {
+    taskHeading = taskName;
+    return taskHeading;
+  };
+
+
 // const emit = defineEmits([
 //   ENTER-EMITS-HERE
 // ])

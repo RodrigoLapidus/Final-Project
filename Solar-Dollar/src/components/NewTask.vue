@@ -1,19 +1,54 @@
 <template>
-  <div>New Task Component</div>
+  <div>
+    <!-- Status Message -->
+    <div v-show="errMessage || errMessageBool">
+      <p>{{ errMessage }}</p>
+      <p>{{ errMessageBool }}</p>
+    </div>
+
+    <!-- Create -->
+    <p>Add a new Task</p>
+    <!-- Form -->
+    <form @submit.prevent="$emit('taskList', taskName)">
+      <input type="text" v-model="taskName" id="taskName" placeholder="Ask a Task Title" required>
+      <input type="text" v-model="taskDescription" id="taskDescription" placeholder="Ask a Task Description">
+      <button type="submit">Add</button>
+    </form>
+  </div>
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
+
 // constant to save a variable that define the custom event that will be emitted to the homeView
 
 // constant to save a variable that holds the value of the title input field of the new task
 
+const taskName = ref("");
+
 // constant to save a variable that holds the value of the description input field of the new task
+
+const taskDescription = ref("");
 
 // constant to save a variable that holds an initial false boolean value for the errorMessage container that is conditionally displayed depending if the input field is empty
 
+const errMessageBool = false;
+
 // const constant to save a variable that holds the value of the error message
 
+const errMessage = ref(null);
+
 // arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
+
+const tasks = () => {
+  if (taskName.value === "") {
+    errorMsg.value = `Error: ${error.message}`;
+    // hides error message
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+  };
+}
 </script>
 
 <style></style>
