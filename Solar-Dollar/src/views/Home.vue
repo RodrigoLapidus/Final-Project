@@ -4,6 +4,7 @@
     <SignOut />
     <p>hello</p>
     <NewTask />
+    <TaskItem />
     <Footer />
   </div>
   
@@ -15,6 +16,7 @@
   import { supabase } from "../supabase";
   import { useRouter } from "vue-router";
   import { useUserStore } from "../stores/user";
+  import { useTaskStore } from "../stores/task";
   import { storeToRefs } from "pinia";
 
   import Nav from "../components/Nav.vue"

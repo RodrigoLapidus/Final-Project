@@ -1,30 +1,49 @@
 <template>
   <div>
     <p>Task Item Component</p>
-    <p @taskList="printTasks">{{ taskHeading }}</p>
+    <div v-for="(task, index) in tasks" :key="index">
+      <p :taskName="task.title">{{ taskName }}</p>
+      <p :taskDescription="task.description">{{ taskDescription }}</p>
+    </div>
+    <p>{{ arrayTask }}</p>
   </div>
 </template>
 
 <script setup>
-  const taskHeading = "";
+  // import { defineProps } from 'vue';
+  import { ref, computed } from "vue";
+  import PersonalRouter from "./PersonalRouter.vue";
+  import { supabase } from "../supabase";
+  import { useRouter } from "vue-router";
+  import { useTaskStore } from "../stores/task";
+  import { storeToRefs } from "pinia";
 
-  const tasks = ref({
-    boolVariable: false,
-    errVariable: "",
-    taskVariable: "",
-    inputField: false,
+
+  const props = defineProps ({
+    taskName: String,
+    taskDescription: String,
   });
-  const printTasks = (taskName) => {
-    taskHeading = taskName;
-    return taskHeading;
+
+  // Error Message
+  const errorMsg = ref("");
+
+  const arrayTask = [];
+
+  const tasks = async () => {
+
+    arrayTask = await useTaskStore().fetchTasks();
+    console.log("Estoy en la función")
   };
 
+  tasks();
 
 // const emit = defineEmits([
 //   ENTER-EMITS-HERE
 // ])
 
 // const props = defineProps(["ENTER-PROP-HERE"]);
+
+
 </script>
 
 <style></style>
