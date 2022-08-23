@@ -5,7 +5,9 @@
     <p>hello</p>
     <NewTask @childNewTask="taskAddition" />
     <!--<h1>{{ taskStore.fetchTasks().tasks }}</h1>-->
-    <TaskItem :task="tarea" v-for="(tarea, index) in tareas" :key="index" />
+    <TaskItem :task="tarea" v-for="(tarea, index) in tareas" :key="index" 
+    @childDeleteTask="taskRemoval"
+    />
     <Footer />
   </div>
   
@@ -38,6 +40,11 @@
     await useTaskStore().addTask(name, description);
     llamarTareas();
   };
+
+  const taskRemoval = async (id) => {
+    await useTaskStore().removeTask(id);
+    llamarTareas();
+  }
 
 </script>
 

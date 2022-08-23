@@ -4,6 +4,7 @@
     <div>
       <p>{{ task.title }}</p>
       <p>{{ task.description }}</p>
+      <button @click="removeTask2(task.id)" style="background-color: lightblue">Delete</button>
     </div>
     <!-- <div v-if="printThis">
       Aquí hay que añadir insertar de forma añadida las nuevas tasks 
@@ -28,6 +29,12 @@
 
 
   const emit = defineEmits (['childEditTask', 'childToggleTask', 'childDeleteTask']);
+
+  const removeTask2 = async (id) => {
+    emit('childDeleteTask', id);
+  };
+
+
 
 /*
   const errorMsg = ref("");

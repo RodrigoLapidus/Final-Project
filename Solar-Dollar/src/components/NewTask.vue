@@ -67,31 +67,6 @@ const addTask2 = async () => {
     taskName.value = null;
     taskDescription.value = null;
   }
-
-}
-
-const addTask = async () => {
-  if (taskName.value === "") {
-    errorMsg.value = `Error: ${error.message}`;
-    // hides error message
-    setTimeout(() => {
-      errorMsg.value = null;
-    }, 5000);
-  } else {
-    try {
-      // calls the user store and send the users info to backend to logIn
-      await useTaskStore().addTask(taskName.value, taskDescription.value);
-      taskName.value = null;
-      taskDescription.value = null;
-    } catch (error) {
-      // displays error message
-      errorMsg.value = `Error: ${error.message}`;
-      // hides error message
-      setTimeout(() => {
-        errorMsg.value = null;
-      }, 5000);
-    }
-  }
 };
 
 
