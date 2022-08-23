@@ -10,9 +10,17 @@
     <p>Add a new Task</p>
     <!-- Form -->
     <!-- <form @submit.prevent="$emit('taskList', taskName)"> -->
-    <form @submit.prevent="addTask"> 
-      <input type="text" v-model="taskName" id="taskName" placeholder="Ask a Task Title" required>
-      <input type="text" v-model="taskDescription" id="taskDescription" placeholder="Ask a Task Description">
+    <form @click.prevent="addTask2">
+      <input type="text"
+        v-model="taskName"
+        placeholder="Add a Task Title"
+        required
+      />
+      <input
+        type="text"
+        v-model="taskDescription"
+        placeholder="Add a Task Description"
+      />
       <button type="submit">Add</button>
     </form>
   </div>
@@ -26,7 +34,9 @@ import { useRouter } from "vue-router";
 import { useTaskStore } from "../stores/task";
 import { storeToRefs } from "pinia";
 
+
 // constant to save a variable that define the custom event that will be emitted to the homeView
+const emit = defineEmits(['childNewTask'])
 
 // constant to save a variable that holds the value of the title input field of the new task
 
@@ -46,6 +56,20 @@ const errMessage = ref(null);
 
 // arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
 
+const addTask2 = async () => {
+  if (taskName.value === "") {
+    errorMsg.value = "This looks empty";
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+  } else {
+    emit('childNewTask', taskName.value, taskDescription.value);
+    taskName.value = null;
+    taskDescription.value = null;
+  }
+
+}
+
 const addTask = async () => {
   if (taskName.value === "") {
     errorMsg.value = `Error: ${error.message}`;
@@ -54,22 +78,23 @@ const addTask = async () => {
       errorMsg.value = null;
     }, 5000);
   } else {
-      try {
+    try {
       // calls the user store and send the users info to backend to logIn
       await useTaskStore().addTask(taskName.value, taskDescription.value);
       taskName.value = null;
       taskDescription.value = null;
-
     } catch (error) {
-        // displays error message
-        errorMsg.value = `Error: ${error.message}`;
-        // hides error message
-        setTimeout(() => {
-          errorMsg.value = null;
-        }, 5000);
-    };
-  };
+      // displays error message
+      errorMsg.value = `Error: ${error.message}`;
+      // hides error message
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
+    }
+  }
 };
+
+
 </script>
 
 <style></style>

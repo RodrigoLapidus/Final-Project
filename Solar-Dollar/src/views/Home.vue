@@ -3,8 +3,9 @@
     <Nav />
     <SignOut />
     <p>hello</p>
-    <NewTask />
-    <TaskItem />
+    <NewTask @childNewTask="taskAddition" />
+    <!--<h1>{{ taskStore.fetchTasks().tasks }}</h1>-->
+    <TaskItem :task="tarea" v-for="(tarea, index) in tareas" :key="index" />
     <Footer />
   </div>
   
@@ -24,6 +25,19 @@
   import Footer from "../components/Footer.vue"
   import NewTask from "../components/NewTask.vue"
   import TaskItem from "../components/TaskItem.vue"
+
+  const tareas = ref([]);
+
+  const llamarTareas = async () => {
+    tareas.value = await useTaskStore().fetchTasks();
+  }
+
+  llamarTareas();
+
+  const taskAddition = async (name, description) => {
+    await useTaskStore().addTask(name, description);
+    llamarTareas();
+  };
 
 </script>
 

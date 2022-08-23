@@ -1,11 +1,16 @@
 <template>
   <div>
     <p>Task Item Component</p>
-    <div v-for="(task, index) in tasks" :key="index">
-      <p :taskName="task.title">{{ taskName }}</p>
-      <p :taskDescription="task.description">{{ taskDescription }}</p>
+    <div>
+      <p>{{ task.title }}</p>
+      <p>{{ task.description }}</p>
     </div>
-    <p>{{ arrayTask }}</p>
+    <!-- <div v-if="printThis">
+      Aquí hay que añadir insertar de forma añadida las nuevas tasks 
+      <p :taskN="taskName">{{newTask}}</p>
+      <p :taskD="taskDescription">{{newTaskDescription}}</p>-->
+      
+    <!--<button @click="tasks">Click to debug</button>-->
   </div>
 </template>
 
@@ -19,23 +24,27 @@
   import { storeToRefs } from "pinia";
 
 
-  const props = defineProps ({
-    taskName: String,
-    taskDescription: String,
-  });
+  const props = defineProps (['task']);
 
-  // Error Message
+
+  const emit = defineEmits (['childEditTask', 'childToggleTask', 'childDeleteTask']);
+
+/*
   const errorMsg = ref("");
 
-  const arrayTask = [];
+  const arrayTask = ref([]);
+
+  const arrayTaskLoaded = ref(null);
+
 
   const tasks = async () => {
 
-    arrayTask = await useTaskStore().fetchTasks();
-    console.log("Estoy en la función")
+    arrayTask.value = await useTaskStore().fetchTasks();
+    
   };
 
   tasks();
+  */
 
 // const emit = defineEmits([
 //   ENTER-EMITS-HERE

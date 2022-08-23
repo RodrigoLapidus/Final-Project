@@ -46,7 +46,7 @@ Estructuración del proyecto:
 
 ```
  - Diseño del frontend
- - Funcionalidades CRUD para añadir, cambiar, eliminar y refrescar las actividades
+ - Adición de funcionalidades
  - Review en mobile y desktop
  - Implementar feedback de diseñadores/UI
  - Debugging
