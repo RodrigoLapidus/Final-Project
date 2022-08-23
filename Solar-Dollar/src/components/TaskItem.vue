@@ -4,6 +4,10 @@
     <div>
       <p>{{ task.title }}</p>
       <p>{{ task.description }}</p>
+      <button @click="toggleOptions" v-show="!toggle" style="background-color: lightgoldenrodyellow">Edit</button>
+        <input v-show="toggle" type="text" v-model="task.title" />
+        <input v-show="toggle" type="text" v-model="task.description" />
+        <button @click="toggleTask2(task.id, task.title, task.description)" v-show="toggle">Edit</button>
       <button @click="removeTask2(task.id)" style="background-color: lightblue">Delete</button>
     </div>
     <!-- <div v-if="printThis">
@@ -24,8 +28,11 @@
   import { useTaskStore } from "../stores/task";
   import { storeToRefs } from "pinia";
 
+  const taskN = ref("");
+  const taskD = ref("");
+  const toggle = ref(false);
 
-  const props = defineProps (['task']);
+  const props = defineProps (['task', 'toggle']);
 
 
   const emit = defineEmits (['childEditTask', 'childToggleTask', 'childDeleteTask']);
@@ -34,6 +41,14 @@
     emit('childDeleteTask', id);
   };
 
+  function toggleOptions() {
+    toggle.value=!toggle.value;
+  };
+
+  const toggleTask2 = async (id, newName, newDescription) => {
+    emit('childToggleTask', id, newName, newDescription);
+    toggle.value=!toggle.value;
+  };
 
 
 /*

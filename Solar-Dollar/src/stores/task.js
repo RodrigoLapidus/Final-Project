@@ -32,6 +32,13 @@ export const useTaskStore = defineStore("tasks", {
       .from('tasks')
       .delete()
       .match({ id: id })
-    }
+    },
+
+    async toggleTask(id, newName, newDescription) {
+      const { data, error } = await supabase
+      .from('tasks')
+      .update({ title: newName, description: newDescription })
+      .match({ id: id })
+    },
   },
 });

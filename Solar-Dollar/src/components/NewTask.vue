@@ -10,7 +10,7 @@
     <p>Add a new Task</p>
     <!-- Form -->
     <!-- <form @submit.prevent="$emit('taskList', taskName)"> -->
-    <form @click.prevent="addTask2">
+    <div>
       <input type="text"
         v-model="taskName"
         placeholder="Add a Task Title"
@@ -21,8 +21,8 @@
         v-model="taskDescription"
         placeholder="Add a Task Description"
       />
-      <button type="submit">Add</button>
-    </form>
+      <button @click.prevent="addTask2">Add</button>
+    </div>
   </div>
 </template>
 
