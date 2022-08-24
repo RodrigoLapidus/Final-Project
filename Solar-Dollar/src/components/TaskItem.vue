@@ -1,14 +1,15 @@
 <template>
   <div>
-    <p>Task Item Component</p>
     <div>
       <p>{{ task.title }}</p>
       <p>{{ task.description }}</p>
+      <button @click="completeTask2(task.id, task.is_complete)" v-show="!task.is_complete" style="background-color: lightblue">Completed?</button>
+      <button @click="completeTask2(task.id, task.is_complete)" v-show="task.is_complete" style="background-color: lightblue">Completed!</button>
       <button @click="toggleOptions" v-show="!toggle" style="background-color: lightgoldenrodyellow">Edit</button>
         <input v-show="toggle" type="text" v-model="task.title" />
         <input v-show="toggle" type="text" v-model="task.description" />
         <button @click="toggleTask2(task.id, task.title, task.description)" v-show="toggle">Edit</button>
-      <button @click="removeTask2(task.id)" style="background-color: lightblue">Delete</button>
+      <button @click="removeTask2(task.id)" style="background-color: lightcoral">Delete</button>
     </div>
     <!-- <div v-if="printThis">
       Aquí hay que añadir insertar de forma añadida las nuevas tasks 
@@ -35,7 +36,7 @@
   const props = defineProps (['task', 'toggle']);
 
 
-  const emit = defineEmits (['childEditTask', 'childToggleTask', 'childDeleteTask']);
+  const emit = defineEmits (['childEditTask', 'childCompleteTask', 'childDeleteTask']);
 
   const removeTask2 = async (id) => {
     emit('childDeleteTask', id);
@@ -46,10 +47,13 @@
   };
 
   const toggleTask2 = async (id, newName, newDescription) => {
-    emit('childToggleTask', id, newName, newDescription);
+    emit('childEditTask', id, newName, newDescription);
     toggle.value=!toggle.value;
   };
 
+  const completeTask2 = async (id, completedBool) => {
+    emit ('childCompleteTask', id, completedBool);
+  }
 
 /*
   const errorMsg = ref("");

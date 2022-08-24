@@ -7,7 +7,8 @@
     <!--<h1>{{ taskStore.fetchTasks().tasks }}</h1>-->
     <TaskItem :task="tarea" v-for="(tarea, index) in tareas" :key="index" 
     @childDeleteTask="taskRemoval"
-    @childToggleTask="taskToggle"
+    @childEditTask="taskToggle"
+    @childCompleteTask="taskCompletion"
     />
     <Footer />
   </div>
@@ -28,6 +29,7 @@
   import Footer from "../components/Footer.vue"
   import NewTask from "../components/NewTask.vue"
   import TaskItem from "../components/TaskItem.vue"
+import { convertColumn } from "@supabase/realtime-js/dist/module/lib/transformers";
 
   const tareas = ref([]);
 
@@ -49,6 +51,13 @@
 
   const taskToggle = async (id, newName, newDescription) => {
     await useTaskStore().toggleTask(id, newName, newDescription);
+    llamarTareas();
+  }
+
+  const taskCompletion = async (id, completedBool) => {
+    
+    await useTaskStore().completeTask(id, completedBool);
+    
     llamarTareas();
   }
 
