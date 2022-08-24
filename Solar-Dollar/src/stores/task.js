@@ -34,7 +34,7 @@ export const useTaskStore = defineStore("tasks", {
       .match({ id: id })
     },
 
-    async toggleTask(id, newName, newDescription) {
+    async toggleTask(newName, newDescription, id) {
       const { data, error } = await supabase
       .from('tasks')
       .update({ title: newName, description: newDescription })

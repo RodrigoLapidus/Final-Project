@@ -6,9 +6,10 @@
       <button @click="completeTask2(task.id, task.is_complete)" v-show="!task.is_complete" style="background-color: lightblue">Completed?</button>
       <button @click="completeTask2(task.id, task.is_complete)" v-show="task.is_complete" style="background-color: lightblue">Completed!</button>
       <button @click="toggleOptions" v-show="!toggle" style="background-color: lightgoldenrodyellow">Edit</button>
-        <input v-show="toggle" type="text" v-model="task.title" />
-        <input v-show="toggle" type="text" v-model="task.description" />
-        <button @click="toggleTask2(task.id, task.title, task.description)" v-show="toggle">Edit</button>
+        <input v-show="toggle" type="text" v-model="newTitle" />
+        <input v-show="toggle" type="text" v-model="newDescription" />
+        <button @click="toggleTask2" v-show="toggle">edit task</button>
+        <button @click="toggleOptions" v-show="toggle">Edit</button>
       <button @click="removeTask2(task.id)" style="background-color: lightcoral">Delete</button>
     </div>
     <!-- <div v-if="printThis">
@@ -29,8 +30,8 @@
   import { useTaskStore } from "../stores/task";
   import { storeToRefs } from "pinia";
 
-  const taskN = ref("");
-  const taskD = ref("");
+  const newTitle = ref("");
+  const newDescription = ref("");
   const toggle = ref(false);
 
   const props = defineProps (['task', 'toggle']);
@@ -44,11 +45,19 @@
 
   function toggleOptions() {
     toggle.value=!toggle.value;
+    newTitle.value = props.task.title;
+    newDescription.value = props.task.description
   };
 
-  const toggleTask2 = async (id, newName, newDescription) => {
-    emit('childEditTask', id, newName, newDescription);
-    toggle.value=!toggle.value;
+  const toggleTask2 = async () => {
+    const newValues = {
+      newTitle: newTitle.value,
+      newDecription: newDescription.value,
+      oldIdValue: props.task
+    }
+    emit('childEditTask',  newValues);
+    newTitle.value = "",
+    newDescription.value = ""
   };
 
   const completeTask2 = async (id, completedBool) => {
