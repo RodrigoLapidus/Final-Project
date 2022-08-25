@@ -2,7 +2,9 @@
   <div>
     <Nav />
     <SignOut />
-    <p>hello</p>
+    <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
     <NewTask @childNewTask="taskAddition" />
     <!--<h1>{{ taskStore.fetchTasks().tasks }}</h1>-->
     <TaskItem
